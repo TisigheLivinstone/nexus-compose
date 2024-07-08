@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  nexus:
+    image: ${NEXUS_IMAGE}
+    container_name: nexus
+    restart: unless-stopped
+    volumes:
+      - nexus-data:/nexus-data
+    ports:
+      - "${NEXUS_PORT}:8081"
+      - "5000:5000"
+    networks:
+      - nexus
+      - proxy
+
+networks:
+  nexus:
+  proxy:
+    external: true
+volumes: 
+  nexus-data:
